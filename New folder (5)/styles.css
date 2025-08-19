@@ -1,0 +1,206 @@
+/* ========== Factory Window (inside tablet, theme-aligned) ========== */
+:root{
+  /* يمكن تعديل تقسيمات شريط التقدّم بتغيير العرض/المسافة */
+  --seg-width: 16px;
+  --seg-gap:   4px;
+}
+
+.factory-window{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 10px;
+  padding: 12px;
+  background: transparent;
+  box-sizing: border-box;
+  color: var(--text-primary);
+  font-family: var(--font);
+}
+
+/* Window Bar */
+.winbar{
+  height: 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  border:1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 10px;
+}
+.winbar-left{ display:flex; align-items:center; gap:8px; }
+.winbar-icon{ width:18px; height:18px; display:block; }
+.winbar-title{
+  color: var(--text-primary);
+  font: 800 13px/1 var(--font);
+  letter-spacing:.3px;
+}
+.winbar-close{
+  width:28px; height:28px; border-radius: 8px; border:1px solid var(--border);
+  background: var(--surface-elevated); color: var(--text-secondary);
+  font: 800 16px/1 var(--font); cursor:pointer;
+  transition: .15s ease;
+}
+.winbar-close:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+/* Header */
+.fw-header{
+  display:flex; align-items:center; gap:12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background: var(--surface);
+  padding: 10px 12px;
+}
+.fw-icon{ width:48px; height:48px; }
+.fw-headings{ display:flex; flex-direction:column; gap:4px; }
+.fw-title{
+  font: 900 16px/1.1 var(--font);
+  color: #cfe8ff;
+  margin:0;
+}
+.fw-sub{
+  margin:0;
+  color: var(--text-secondary);
+  font: 600 12px/1.3 var(--font);
+}
+
+/* Controls */
+.fw-controls{
+  display:flex; align-items:center; gap:8px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background: var(--surface);
+  padding:6px 8px;
+}
+.s-icon{ color: var(--accent); }
+.s-input{
+  flex:1; height: 30px;
+  border:1px solid var(--border); border-radius:8px;
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  padding: 0 10px;
+  outline: none;
+}
+.s-input::placeholder{ color: var(--text-muted); }
+.s-toggle{
+  height: 30px; padding: 0 10px;
+  border:1px solid var(--border); border-radius:8px;
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  font: 700 12px/1 var(--font); cursor:pointer; transition:.15s ease;
+}
+.s-toggle:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+/* Content */
+.fw-content{
+  border:1px solid var(--border);
+  border-radius:10px;
+  background: var(--surface);
+  overflow: auto;
+  padding: 10px;
+}
+
+/* Table */
+.fw-table{
+  width:100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.fw-table thead th{
+  text-align:left;
+  padding: 10px 8px;
+  font: 800 12px/1 var(--font);
+  color: #a9c7e2;
+  border-bottom: 1px solid var(--border);
+}
+.fw-table tbody td{
+  padding: 10px 8px;
+  font: 700 12px/1.2 var(--font);
+  color: #dfeaf2;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated);
+}
+.fw-table tbody tr:hover td{
+  background: rgba(255,255,255,.03);
+}
+
+/* Material cell */
+.mat{ display:flex; align-items:center; gap:10px; }
+.mat-icon{ width:28px; height:28px; object-fit:contain; }
+.mat-name{ font-weight: 800; color: var(--text-primary); }
+
+/* ===== Segmented Progress (CSS-only) =====
+   مرّر النسبة عبر: <tr style="--pct: 68"> … <div class="segbar"></div> */
+.segbar{
+  --pct: 0; /* تُضبط من الـrow */
+  position: relative;
+  height: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  overflow: hidden;
+}
+/* المسار المقسّم */
+.segbar::before{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(255,255,255,.06);
+  border-radius: inherit;
+  -webkit-mask: repeating-linear-gradient(
+    to right,
+    #000 0 calc(var(--seg-width)),
+    transparent calc(var(--seg-width)) calc(var(--seg-width) + var(--seg-gap))
+  );
+          mask: repeating-linear-gradient(
+    to right,
+    #000 0 calc(var(--seg-width)),
+    transparent calc(var(--seg-width)) calc(var(--seg-width) + var(--seg-gap))
+  );
+}
+/* التعبئة */
+.segbar::after{
+  content:"";
+  position:absolute; inset:0;
+  width: calc(var(--pct) * 1%);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  border-radius: inherit;
+  -webkit-mask: repeating-linear-gradient(
+    to right,
+    #000 0 calc(var(--seg-width)),
+    transparent calc(var(--seg-width)) calc(var(--seg-width) + var(--seg-gap))
+  );
+          mask: repeating-linear-gradient(
+    to right,
+    #000 0 calc(var(--seg-width)),
+    transparent calc(var(--seg-width)) calc(var(--seg-width) + var(--seg-gap))
+  );
+}
+
+/* نسبة مئوية + ألوان التحذير */
+.pct{ text-align:right; font-weight:900; }
+.pct.warn{ color:#ffd6a6; }
+.pct.danger{ color:#ffc7c7; }
+.segbar.warn::after{ background: linear-gradient(90deg, #ffd36f, #e8a43c); }
+.segbar.danger::after{ background: linear-gradient(90deg, #ff6b6b, #c64242); }
+
+/* Scrollbar aligned with tablet theme */
+.fw-content,
+.factory-window {
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+.fw-content::-webkit-scrollbar,
+.factory-window::-webkit-scrollbar{ width: 8px; height: 8px; }
+.fw-content::-webkit-scrollbar-track,
+.factory-window::-webkit-scrollbar-track{ background: transparent; }
+.fw-content::-webkit-scrollbar-thumb,
+.factory-window::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+  border-radius: 999px; border:2px solid transparent; background-clip: padding-box;
+}
+
+/* Responsive */
+@media (max-width: 740px){
+  .fw-title{ font-size: 14px; }
+  .fw-sub{ font-size: 11px; }
+  .winbar-title{ font-size: 12px; }
+}

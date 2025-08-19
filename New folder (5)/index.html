@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Factory Needs Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- نافذة داخل التابلت -->
+  <div class="factory-window">
+    <!-- Window Bar -->
+    <div class="winbar">
+      <div class="winbar-left">
+        <img src="https://images.dz-crew.com/tablet/icons/stock-market.png" alt="Window Icon" class="winbar-icon" />
+        <span class="winbar-title">Factory Needs Dashboard</span>
+      </div>
+      <button class="winbar-close" aria-label="Close" id="closeBtn">×</button>
+    </div>
+
+    <!-- Header -->
+    <div class="fw-header">
+      <img src="https://images.dz-crew.com/tablet/icons/factory-app.png" alt="Factory Icon" class="fw-icon" />
+      <div class="fw-headings">
+        <h2 class="fw-title">Monitor Factory Material Needs</h2>
+        <p class="fw-sub">Keep track of current stock levels and forecast material needs to maintain optimal factory operation.</p>
+      </div>
+    </div>
+
+    <!-- Search / Filter -->
+    <div class="fw-controls">
+      <span class="s-icon" aria-hidden="true">🔍</span>
+      <input type="text" id="search-bar" placeholder="Search materials..." class="s-input" />
+      <button class="s-toggle" id="toggleLowBtn" title="Show only low %">Toggle Low %</button>
+    </div>
+
+    <!-- Content -->
+    <div class="fw-content scroll-inset">
+      <table class="fw-table" id="materialsTable">
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th style="width:260px">Stock Level</th>
+            <th style="width:72px">%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- rows populated by script.js -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
