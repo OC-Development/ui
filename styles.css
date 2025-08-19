@@ -1,0 +1,551 @@
+/* ========== Tablet Theme Variables ========== */
+:root {
+  /* Primary Colors - Blue Theme */
+  --primary-bg: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+  --secondary-bg: rgba(30, 58, 138, 0.8);
+  --surface: rgba(30, 64, 175, 0.6);
+  --surface-elevated: rgba(37, 99, 235, 0.4);
+  --surface-glass: rgba(59, 130, 246, 0.15);
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-accent: #60a5fa;
+  
+  /* Accent Colors */
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --accent-light: #60a5fa;
+  
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  
+  /* Border & Effects */
+  --border: rgba(59, 130, 246, 0.3);
+  --border-light: rgba(147, 197, 253, 0.2);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --blur: blur(16px);
+  
+  /* Typography */
+  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* Progress Bar */
+  --seg-width: 18px;
+  --seg-gap: 3px;
+}
+
+/* ========== Base Styles ========== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--primary-bg);
+  font-family: var(--font);
+  overflow: hidden;
+}
+
+/* ========== Factory Window Container ========== */
+.factory-window {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 16px;
+  padding: 20px;
+  background: var(--primary-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.factory-window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(30, 64, 175, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.factory-window > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Window Bar ========== */
+.winbar {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0 20px;
+  box-shadow: var(--shadow-light);
+}
+
+.winbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.winbar-icon {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.winbar-title {
+  color: var(--text-primary);
+  font: 700 15px/1 var(--font);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.winbar-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-elevated);
+  backdrop-filter: var(--blur);
+  color: var(--text-secondary);
+  font: 700 18px/1 var(--font);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.winbar-close:hover {
+  border-color: var(--accent-light);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== Header Section ========== */
+.fw-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow-light);
+}
+
+.fw-icon {
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.fw-headings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fw-title {
+  font: 900 20px/1.1 var(--font);
+  color: var(--text-primary);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fw-sub {
+  margin: 0;
+  color: var(--text-secondary);
+  font: 500 14px/1.4 var(--font);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Controls Section ========== */
+.fw-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-shadow: var(--shadow-light);
+}
+
+.s-icon {
+  color: var(--accent-light);
+  font-size: 18px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.s-input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface-elevated);
+  backdrop-filter: var(--blur);
+  color: var(--text-primary);
+  padding: 0 16px;
+  outline: none;
+  font: 500 14px/1 var(--font);
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.s-input::placeholder {
+  color: var(--text-muted);
+}
+
+.s-input:focus {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.s-toggle {
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface-elevated);
+  backdrop-filter: var(--blur);
+  color: var(--text-secondary);
+  font: 600 13px/1 var(--font);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.s-toggle:hover {
+  border-color: var(--accent-light);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.s-toggle.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+}
+
+/* ========== Content Area ========== */
+.fw-content {
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.fw-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    rgba(37, 99, 235, 0.02) 50%, 
+    rgba(30, 64, 175, 0.05) 100%);
+  pointer-events: none;
+}
+
+/* ========== Table Styles ========== */
+.fw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  position: relative;
+  z-index: 1;
+}
+
+.fw-table thead th {
+  text-align: left;
+  padding: 20px 24px;
+  font: 700 13px/1 var(--font);
+  color: var(--text-accent);
+  border-bottom: 2px solid var(--border);
+  background: var(--surface-elevated);
+  backdrop-filter: var(--blur);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.fw-table tbody td {
+  padding: 16px 24px;
+  font: 600 13px/1.3 var(--font);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface-elevated);
+  backdrop-filter: var(--blur);
+  transition: all 0.3s ease;
+}
+
+.fw-table tbody tr:hover td {
+  background: rgba(59, 130, 246, 0.2);
+  transform: translateX(4px);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Material Cell ========== */
+.mat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mat-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+  padding: 4px;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-light);
+}
+
+.mat-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== Enhanced Segmented Progress Bar ========== */
+.segbar {
+  --pct: 0;
+  position: relative;
+  height: 14px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.segbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: inherit;
+  -webkit-mask: repeating-linear-gradient(
+    to right,
+    #000 0 var(--seg-width),
+    transparent var(--seg-width) calc(var(--seg-width) + var(--seg-gap))
+  );
+  mask: repeating-linear-gradient(
+    to right,
+    #000 0 var(--seg-width),
+    transparent var(--seg-width) calc(var(--seg-width) + var(--seg-gap))
+  );
+}
+
+.segbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: calc(var(--pct) * 1%);
+  background: linear-gradient(90deg, var(--accent-light), var(--accent));
+  border-radius: inherit;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  -webkit-mask: repeating-linear-gradient(
+    to right,
+    #000 0 var(--seg-width),
+    transparent var(--seg-width) calc(var(--seg-width) + var(--seg-gap))
+  );
+  mask: repeating-linear-gradient(
+    to right,
+    #000 0 var(--seg-width),
+    transparent var(--seg-width) calc(var(--seg-width) + var(--seg-gap))
+  );
+  transition: width 0.5s ease;
+}
+
+/* ========== Status Colors ========== */
+.pct {
+  text-align: right;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.pct.warn {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.pct.danger {
+  color: #f87171;
+  text-shadow: 0 0 8px rgba(248, 113, 113, 0.5);
+}
+
+.segbar.warn::after {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+.segbar.danger::after {
+  background: linear-gradient(90deg, #f87171, #ef4444);
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+}
+
+/* ========== Scrollbar Styling ========== */
+.fw-content {
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
+.fw-content::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.fw-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fw-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-light), var(--accent));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.fw-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+  .factory-window {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .fw-title {
+    font-size: 18px;
+  }
+  
+  .fw-sub {
+    font-size: 13px;
+  }
+  
+  .winbar-title {
+    font-size: 14px;
+  }
+  
+  .fw-table thead th,
+  .fw-table tbody td {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .factory-window {
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .fw-header {
+    padding: 16px 20px;
+  }
+  
+  .fw-title {
+    font-size: 16px;
+  }
+  
+  .fw-sub {
+    font-size: 12px;
+  }
+  
+  .mat-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .segbar {
+    height: 12px;
+  }
+}
+
+/* ========== Animation Effects ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.factory-window > * {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.factory-window > *:nth-child(1) { animation-delay: 0.1s; }
+.factory-window > *:nth-child(2) { animation-delay: 0.2s; }
+.factory-window > *:nth-child(3) { animation-delay: 0.3s; }
+.factory-window > *:nth-child(4) { animation-delay: 0.4s; }
+
+/* ========== Glass Effect Enhancement ========== */
+.winbar,
+.fw-header,
+.fw-controls,
+.fw-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.winbar::before,
+.fw-header::before,
+.fw-controls::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.winbar:hover::before,
+.fw-header:hover::before,
+.fw-controls:hover::before {
+  left: 100%;
+}
